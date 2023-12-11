@@ -1,80 +1,9 @@
-function matrixGenerator(matrixSize, grass, grassEater, Predator, krak,jur,bomb) {
-    var matrix = []
 
-    for (let i = 0; i < matrixSize; i++) {
-        matrix.push([])
-        for (let j = 0; j < matrixSize; j++) {
-            matrix[i].push(0)
-
-        }
-    }
-
-
-    for (let i = 0; i < grass; i++) {
-
-        var x = Math.floor(Math.random() * matrixSize)
-        var y = Math.floor(Math.random() * matrixSize)
-
-        matrix[y][x] = 1
-
-    }
-
-    for (let i = 0; i < grassEater; i++) {
-
-        var x = Math.floor(Math.random() * matrixSize)
-        var y = Math.floor(Math.random() * matrixSize)
-
-        matrix[y][x] = 2
-
-    }
-
-    for (let i = 0; i < Predator; i++) {
-
-        var x = Math.floor(Math.random() * matrixSize)
-        var y = Math.floor(Math.random() * matrixSize)
-
-        matrix[y][x] = 3
-
-    }
-    for (let i = 0; i < krak; i++) {
-
-        var x = Math.floor(Math.random() * matrixSize)
-        var y = Math.floor(Math.random() * matrixSize)
-
-        matrix[y][x] = 4
-
-    }
-    for (let i = 0; i < jur; i++) {
-
-        var x = Math.floor(Math.random() * matrixSize)
-        var y = Math.floor(Math.random() * matrixSize)
-
-        matrix[y][x] = 5
-
-    }
-    for (let i = 0; i < bomb; i++) {
-
-        var x = Math.floor(Math.random() * matrixSize)
-        var y = Math.floor(Math.random() * matrixSize)
-
-        matrix[y][x] = 6
-
-    }
-    return matrix
-}
-
-var matrix = matrixGenerator(30, 40, 30, 15,50,25, 15)
 var side = 25
 
-var grassArr = []
-var grassEaterArr = []
-var predatorArr = []
-var krakArr = []
-var jurArr = []
-var bombArr = []
 
 function setup() {
-    frameRate(15)
+   
     createCanvas(matrix[0].length * side, matrix.length * side)
 
     for (let y = 0; y < matrix.length; y++) {
@@ -160,5 +89,4 @@ function draw() {
         bombArr[i].eat()
 }
 
-//  console.log(grassEaterArr.length);
 }

@@ -1,4 +1,6 @@
-class Jur extends LivingCreature {
+let LivingCreature = require("./LivingCreature")
+
+module.exports = class Jur extends LivingCreature {
     constructor(x, y) {
         super(x,y)
         this.energy = 10;
@@ -36,7 +38,7 @@ class Jur extends LivingCreature {
     }
     mul() {
         let emptyCell = this.chooseCell(0);
-        let newCell = random(emptyCell)
+        let newCell = emptyCell[Math.floor(Math.random() * found.length)]
 
         if (newCell && this.energy > 5) {
             let newX = newCell[0];
@@ -51,7 +53,7 @@ class Jur extends LivingCreature {
     }
     eat() {
         let emptyCell = this.chooseCell(4);
-        let newCell = random(emptyCell)
+        let newCell = emptyCell[Math.floor(Math.random() * found.length)]
 
         if (newCell) {
             this.energy += 5;
@@ -79,7 +81,7 @@ class Jur extends LivingCreature {
     }
     move() {
         let emptyCell = this.chooseCell(0);
-        let newCell = random(emptyCell)
+        let newCell = emptyCell[Math.floor(Math.random() * found.length)]
 
         if (newCell) {
             let newX = newCell[0];

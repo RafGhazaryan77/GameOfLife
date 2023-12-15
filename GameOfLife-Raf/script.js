@@ -1,42 +1,16 @@
-
+var socket = io()
 var side = 25
 
 
 function setup() {
    
-    createCanvas(matrix[0].length * side, matrix.length * side)
+    createCanvas(25 * side, 25 * side)
 
-    for (let y = 0; y < matrix.length; y++) {
-        for (let x = 0; x < matrix[y].length; x++) {
-
-            if (matrix[y][x] == 1) {
-                var gr = new Grass(x, y)
-                grassArr.push(gr)
-            } else if (matrix[y][x] == 2) {
-                var grEat = new GrassEater(x, y)
-                grassEaterArr.push(grEat)
-            } else if (matrix[y][x] == 3) {
-                var pred = new Predator(x, y)
-                predatorArr.push(pred)
-            }else if (matrix[y][x] == 4) {
-                    var krd = new Krak(x, y)
-                    krakArr.push(krd)
-            }
-            else if (matrix[y][x] == 5) {
-                var pp= new Jur(x, y)
-                jurArr.push(pp)
-            }else if (matrix[y][x] == 6) {
-                var dd= new Bomb(x, y)
-                bombArr.push(dd)
-            }
-
-
-        }
-    }
+   
 
 
 }
-function draw() {
+function nkarel(matrix) {
 
     for (let y = 0; y < matrix.length; y++) {
         for (let x = 0; x < matrix[y].length; x++) {
@@ -64,29 +38,11 @@ function draw() {
 
     }
 
-    for (let i in grassArr) {
-        grassArr[i].mul()
-    }
-
-    for (let i in grassEaterArr) {
-        grassEaterArr[i].eat()
-
-
-    }
-
-
-    for (let i in predatorArr) {
-
-        predatorArr[i].eat()
-    }
-    for (let i in krakArr) {
-        krakArr[i].eat()
-    }
-    for (let i in jurArr) {
-        jurArr[i].eat()
-    }
-    for (let i in bombArr) {
-        bombArr[i].eat()
-}
+    
 
 }
+
+
+setInterval(function () {
+    socket.on('send matrix', nkarel)
+ },500)

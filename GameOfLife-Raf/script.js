@@ -1,3 +1,4 @@
+
 var socket = io()
 var side = 25
 
@@ -46,3 +47,5 @@ function nkarel(matrix) {
 setInterval(function () {
     socket.on('send matrix', nkarel)
  },500)
+
+ socket.emit("addGrass")

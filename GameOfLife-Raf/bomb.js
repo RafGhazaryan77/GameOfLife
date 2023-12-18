@@ -22,6 +22,7 @@ module.exports = class Bomb extends LivingCreature {
         this.getNewCoordinates();
         
         return super.chooseCell(char);
+        
     }
     mul() {
         let emptyCell = this.chooseCell(0);

@@ -7,9 +7,12 @@ var fs = require('fs');
 app.use(express.static("."));
 
 app.get('/', function (req, res) {
-    res.redirect('index.html');
+    res.redirect('start/start.html');
 });
 
+// app.get('/index', function (req, res) {
+//     res.redirect('index.html');
+// });
 server.listen(3000, () => {
     console.log('connected');
 });
@@ -169,9 +172,47 @@ io.sockets.emit('send matrix', matrix)
 
 setInterval(game, 500)
 
-io.on('connection', function () {
-    createObject(matrix)
-})
+////Add buttons
 
+function AddGrass(){
+    for(let i = 0; i < 7; i++){
+        var x = Math.floor(Math.random() * matrix.length)
+        var y = Math.floor(Math.random() * matrix.length)
+        
+        if(matric[y][x] == 0){
+            matrix[y][x] = 1
+
+            let grass = new Grass(x,y)
+            grassArr.push(grass)
+        }
+    }
+    io.sockets.emit("send matrix", matrix)
+}
+
+////statistics
+var statistics = {
+
+}
+
+
+setInterval(function (){
+    statistics.grass = grassArr.length
+    statistics.grassEater = grassEaterArr.length
+    statistics.bomb = bombArr.length
+    statistics.jur = jurArr.length
+    statistics.predator = predatorArr.length
+    statistics.krak = krakArr.length
+
+
+    fs.writeFile("statistics.json", JSON.stringify(statistics) , function(error){
+        console.log("game of life statistics");
+
+    })
+},1000)
+
+io.on('connection', function (socket) {
+    createObject(matrix)
+    socket.on("addGrass", AddGrass)
+})
 
 

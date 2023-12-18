@@ -20,7 +20,7 @@ module.exports = class Krak extends LivingCreature {
     }
     chooseCell(char) {
         this.getNewCoordinates();
-        let found = [];
+        return super.chooseCell(char);
 
         for (let i in this.directions) {
             let x = this.directions[i][0];
@@ -38,7 +38,7 @@ module.exports = class Krak extends LivingCreature {
     }
     mul() {
         let emptyCell = this.chooseCell(0);
-        let newCell = emptyCell[Math.floor(Math.random() * found.length)]
+        let newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)]
 
         if (newCell && this.energy > 5) {
             let newX = newCell[0];

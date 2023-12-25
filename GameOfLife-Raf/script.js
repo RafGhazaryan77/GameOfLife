@@ -6,19 +6,41 @@ var side = 25
 function setup() {
    
     createCanvas(25 * side, 25 * side)
-
-   
-
-
+    background("#acacac");
 }
+    socket.on("Winter", function (data) {
+        weath = data;
+    })
+    socket.on("Summer", function (data) {
+        weath = data;
+    })
+    socket.on("Spring", function (data) {
+        weath = data;
+    })
+    socket.on("Autumn", function (data) {
+        weath = data;
+    })
+   
+    var weath = "spring";
+
 function nkarel(matrix) {
 
     for (let y = 0; y < matrix.length; y++) {
         for (let x = 0; x < matrix[y].length; x++) {
-
             if (matrix[y][x] == 1) {
-                fill("green")
-            } else if (matrix[y][x] == 2) {
+                if (weath == "spring") {
+                    fill("darkgreen");
+                }
+                else if (weath == "summer") {
+                    fill("#79a83b");
+                }
+                else if (weath == "autumn") {
+                    fill("#ff8453");
+                }
+                if (weath == "winter") {
+                    fill("#ffffff");
+                }
+            }else if (matrix[y][x] == 2) {
                 fill("yellow")
             } else if (matrix[y][x] == 3) {
                 fill("red")
@@ -59,9 +81,9 @@ function nkarel(matrix) {
 
     socket.emit("addGrass")
 }
-function AddBomb(){
+function AddKrak(){
 
-    socket.emit("addBomb")
+    socket.emit("addKrak")
 }
 function AddGrassEater(){
 
@@ -74,4 +96,19 @@ function AddBomb(){
 function AddJur(){
 
     socket.emit("addJur")
+}
+function KillAll(){
+    socket.emit("killAll");
+}
+function Winter() {
+    socket.emit("winter");
+}
+function Summer() {
+    socket.emit("summer");
+}
+function Spring() {
+    socket.emit("spring");
+}
+function Autumn() {
+    socket.emit("autumn");
 }

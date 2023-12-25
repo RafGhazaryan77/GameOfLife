@@ -172,21 +172,27 @@ io.sockets.emit('send matrix', matrix)
 
 setInterval(game, 500)
 
-////Add buttons
-function KillAll() {
-    grassArr = [];
-    grEaterArr = [];
-    jurArr = [];
-    krakArr = [];
-    predatorArr = [];
-    bombArr = [];
-    for (var y = 0; y < matrix.length; y++) {
-        for (var x = 0; x < matrix[y].length; x++) {
-            matrix[y][x] = 0;
-        }
-    }
-    io.sockets.emit("send matrix", matrix);
+var weath;
+
+function Winter() {
+    weath = "winter";
+    io.sockets.emit("Winter", weath);
 }
+
+function Summer() {
+    weath = "summer";
+    io.sockets.emit('Summer', weath);
+}
+
+function Spring() {
+    weath = "spring";
+    io.sockets.emit('Spring', weath);
+}
+function Autumn() {
+    weath = "autumn";
+    io.sockets.emit('Autumn', weath);
+}
+////Add buttons
 
 function AddGrass(){
     for(let i = 0; i < 7; i++){
@@ -241,8 +247,8 @@ function AddKrak(){
         if(matrix[y][x] == 0){
             matrix[y][x] = 4
 
-            let krak = new Krak(x,y)
-            krakArr.push(krak)
+            let krd = new Krak(x,y)
+            krakArr.push(krd)
             
         }
     }
@@ -279,7 +285,20 @@ function AddPredator(){
     io.sockets.emit("send matrix", matrix)
 }
 
-
+function Kill() {
+    grassArr = [];
+    grassEaterArr = [];
+    gishatichner = [];
+    hrashagorcarr = [];
+    xotabuysarr = [];
+    vorsordarr = [];
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
+            matrix[y][x] = 0;
+        }
+    }
+    io.sockets.emit("send matrix", matrix);
+}
 
 
 
@@ -313,5 +332,9 @@ io.on('connection', function (socket) {
     socket.on("addJur", AddJur)
     socket.on("addPredator", AddPredator)
     socket.on("addBomb", AddBomb)
-    socket.on("killAll", KillAll);
+    socket.on("killAll", Kill);
+    socket.on("spring", Spring);
+    socket.on("summer", Summer);
+    socket.on("autumn", Autumn);
+    socket.on("winter", Winter);
 })
